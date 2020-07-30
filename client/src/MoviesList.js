@@ -10,25 +10,21 @@ class MoviesList extends Component {
 
   search = event => {
       event.preventDefault();
+      console.log(process.env.REACT_APP_SECRET_KEY);
+      fetch(`https://www.omdbapi.com/?apikey=${process.env.REACT_APP_SECRET_KEY}&s=${this.state.searchTerm}&plot=full`)
+          .then(res => res.json())
+          .then(data => {
+              if (!data.Search) {
+                  this.setState({ moviesList: [] });
+                  return;
+              }
 
-    //   fetch(
-    //           `https://www.omdbapi.com/?apikey=${your_API}&s=${
-    //               this.state.searchTerm
-    //           }&plot=full`
-    //       )
-        //   .then(res => res.json())
-        //   .then(data => {
-        //       if (!data.Search) {
-        //           this.setState({ moviesList: [] });
-        //           return;
-        //       }
-
-            //   const moviesList = data.Search.map(movie => movie.imdbID);
-            //   console.log(moviesList);
-            //   this.setState({
-            //       moviesList
-            //   });
-            // });
+              const moviesList = data.Search.map(movie => movie.imdbID);
+              console.log(moviesList);
+              this.setState({
+                  moviesList
+              });
+            });
           
   };
 
@@ -43,9 +39,9 @@ class MoviesList extends Component {
       console.log(moviesList);
 
       return (
-          <div>
-              <MovieCard />
-              {/* <form onSubmit={this.search}>
+        <div className="wrapper">
+              {/* <MovieCard /> */}
+              <form onSubmit={this.search}>
                   <input
                       placeholder="Search for a movie"
                       onChange={this.handleChange}
@@ -57,10 +53,9 @@ class MoviesList extends Component {
                   ))
               ) : (
                   <p>
-                      Couldn't find any movie. Please search again using
-                      another search criteria.
+                    Please search for a movie.
                   </p>
-              )} */}
+              )}
           </div>
       );
   }

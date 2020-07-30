@@ -4,10 +4,11 @@ import MoviesList from './MoviesList';
 import MyList from './MyList';
 
 
-class Home extends Component {
+class Header extends Component {
   render() {
     return (
     <div className="App">
+      <h1>Movie List</h1>
       <Link to={'./MoviesList'}>
       <button>SEARCH</button>
         {/* <button variant="raised">
@@ -20,9 +21,8 @@ class Home extends Component {
             <MyList />
         </button> */}
       </Link>
-      <h1>Movie List</h1>
     </div>
     );
   }
 }
-export default Home;
+export default Header;

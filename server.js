@@ -157,10 +157,19 @@ app.get('/api/movies/:id', (req, res) => {
 });
 
 // An api endpoint that adds one movie to an array
-app.post('/api/movies', (req,res) => {
+app.post('/api/movies', (req, res) => {
+  console.log('post');
   const newMovie = { ...req.body };
   movies.push(newMovie);
   res.status(201).set('location', `/api/movies/${newMovie.imdbID}`).json(newMovie);
+});
+
+// An api endpoint that changes isWatched key
+app.put('/api/movies/:id', (req, res) => {
+  console.log('patch');
+  const movie = movies.find(movie => movie.imdbID === req.params.id);
+  movie.isWatched = req.body.isWatched;
+  res.status(200).json(movie);
 });
 
 function deleteMovie(id) {
