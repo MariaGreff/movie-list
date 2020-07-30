@@ -3,7 +3,10 @@ require('dotenv').config()
 
 class MovieCard extends Component {
   state = {
-      movieData: {}
+      myMovieData: { 
+        isWatched: false,
+        isFavourite: false
+      }
   };
 
   componentDidMount() {
@@ -23,10 +26,22 @@ class MovieCard extends Component {
     //     )
     //     .then(res => res.json())
         .then(data => {
-            this.setState({ movieData: data });
+            this.setState({ ...this.state, ...data })
+            console.log(this.state);;
         });
 }
 
+// add movie to my list
+handleChange = event => {
+  this.setState({
+
+});
+console.log(this.state);
+}
+
+// mark movie as watched
+
+// delete movie from my list
 
   render() {
       const {
@@ -36,7 +51,7 @@ class MovieCard extends Component {
           Plot,
           Poster,
           imdbRating
-      } = this.state.movieData;
+      } = this.state;
 
       if (!Poster || Poster === 'N/A') {
           return null;
@@ -65,7 +80,11 @@ class MovieCard extends Component {
                               <span key={g}>{g}</span>
                           ))}
                   </div>
-                  <button>Add to My List</button>
+                  <div className="buttons-container">
+                  <button onClick={this.handleChange}>Add to My List</button>
+                  <button onClick={this.handleChange}>Mark as watched</button>
+                  <button onClick={this.handleChange}>Delete From My List</button>
+                  </div>
               </div>
           </div>
       );
