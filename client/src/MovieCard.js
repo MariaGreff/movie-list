@@ -5,7 +5,6 @@ class MovieCard extends Component {
   state = {
       myMovieData: { 
         isWatched: false,
-        isFavourite: false
       }
   };
 
@@ -31,17 +30,25 @@ class MovieCard extends Component {
         });
 }
 
-// add movie to my list
-handleChange = event => {
-  this.setState({
-
-});
-console.log(this.state);
+// add movie to the list
+addMovie = () => {
+  fetch('/api/movies', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ movie: this.state }),
+  });
 }
 
 // mark movie as watched
-
+handleChange = event => {
+  this.setState({});
+  console.log(this.state);
+}
 // delete movie from my list
+deleteMovie = event => {
+  this.setState({});
+  console.log(this.state);
+}
 
   render() {
       const {
@@ -81,9 +88,9 @@ console.log(this.state);
                           ))}
                   </div>
                   <div className="buttons-container">
-                  <button onClick={this.handleChange}>Add to My List</button>
+                  <button onClick={this.addMovie}>Add to My List</button>
                   <button onClick={this.handleChange}>Mark as watched</button>
-                  <button onClick={this.handleChange}>Delete From My List</button>
+                  <button onClick={this.deleteMovie}>Delete From My List</button>
                   </div>
               </div>
           </div>
