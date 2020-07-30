@@ -126,7 +126,7 @@ form button:active {
     width: 100%;
 }
 
-.movie-info .tags-container {
+.tags-container {
     position: relative;
      width: 100%;
 }
@@ -147,13 +147,17 @@ form button:active {
 .movie-info .buttons-container button:hover {
    cursor: pointer;
 }
-.movie-info .tags-container span {
+.tags-container span {
     border: 2px solid black;
     border-radius: 4px;
     display: inline-block;
     font-size: 12px;
     padding: 3px 10px;
     margin: 5px;
+}
+
+span:hover{
+    cursor: pointer;
 }
 
 @media (max-width: 768px) {

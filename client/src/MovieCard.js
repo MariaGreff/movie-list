@@ -7,15 +7,6 @@ class MovieCard extends Component {
   };
 
   componentDidMount() {
-      // fetch(
-      //       '/api/movies/tt0253474'
-      //   )
-      //   .then(res => res.json())
-        // .then(data => console.log(data));
-   
-        // .then(res => {
-        //     this.setState({ movieData: res });
-        // });
     fetch(
             `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_SECRET_KEY}&i=${
                 this.props.movieID
@@ -23,11 +14,13 @@ class MovieCard extends Component {
         )
         .then(res => res.json())
         .then(data => {
-            this.setState({ ...this.state, ...data })
+            this.setState( prevState => {
+              return { 
+                ...prevState, ...data 
+              };
+            });
             console.log(this.state);
         });
-
-
 }
 
 // add movie to the list
@@ -49,12 +42,12 @@ handleChange = async () => {
     body: JSON.stringify({ isWatched : !this.state.isWatched }),
   })
   .then(res => res.json())
-  .then(data => console.log(data));
-
-  this.setState({
-    isWatched: !this.state.isWatched
-  });
-  console.log(this.state);
+  .then(data => {
+    this.setState( prevState => { 
+      return {...prevState, ...data} 
+    })
+    console.log(this.state);
+});
 }
 
 // delete movie from my list
@@ -63,9 +56,17 @@ deleteMovie = async () => {
   await fetch(`/api/movies/${this.state.imdbID}`, {
       method: 'delete'
     })
-    .then(res =>
-      res);
+    .then(data => {
+      this.setState( prevState => { 
+        return {...prevState, ...data} 
+      })
+      console.log(this.state);
+  });
 }
+
+// shouldComponentUpdate(prevState) {
+//   return prevState ==! this.state;
+// }
 
   render() {
       const {
@@ -84,7 +85,6 @@ deleteMovie = async () => {
 
       return (
             <div className={`movie-card-container ${isWatched.toString()}`}>
-            {/* <div>Placeholder</div> */}
               <div className="image-container">
                   <div
                       className="bg-image"

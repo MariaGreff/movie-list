@@ -20,7 +20,9 @@ class Home extends Component {
             <MyList />
         </button> */}
       </Link>
-      <h1>Movie List</h1>
+      <h1>Movie List App</h1>
+      <div>Create your own movie list!</div>
+      <p>P.S. Start with the "Search" Button</p>
     </div>
     );
   }
