@@ -16,12 +16,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.js*"
+    "lint": "eslint \"**/*.{js,jsx}\""
   },
   "proxy": "http://localhost:5000",
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
