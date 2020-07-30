@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import MoviesList from './MoviesList';
 
 
 class Home extends Component {
@@ -8,9 +9,9 @@ class Home extends Component {
     <div className="App">
       <h1>Movie List</h1>
       {/* Link to List.js */}
-      <Link to={'./list'}>
+      <Link to={'./MoviesList'}>
         <button variant="raised">
-            My Movie List
+            <MoviesList />
         </button>
       </Link>
     </div>
