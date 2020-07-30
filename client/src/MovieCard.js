@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 require('dotenv').config()
 
 class MovieCard extends Component {
+
   state = {
-        isWatched: false,
+   search: ''
   };
 
   componentDidMount() {
@@ -62,11 +63,21 @@ deleteMovie = async () => {
       })
       console.log(this.state);
   });
+  window.location.reload();
 }
 
 // shouldComponentUpdate(prevState) {
 //   return prevState ==! this.state;
 // }
+sendBackData = () => {
+  this.props.parentCallback(this.state);
+}
+
+checkIfIsWatched = () => {
+  console.log(this.state.isWatched.toString());
+ return this.state.isWatched.toString(); 
+}
+
 
   render() {
       const {
@@ -76,15 +87,16 @@ deleteMovie = async () => {
           Plot,
           Poster,
           imdbRating,
-          isWatched
       } = this.state;
+
 
       if (!Poster || Poster === 'N/A') {
           return null;
       }
 
+
       return (
-            <div className={`movie-card-container ${isWatched.toString()}`}>
+            <div className={`movie-card-container ${this.checkIfIsWatched}`}>
               <div className="image-container">
                   <div
                       className="bg-image"
@@ -106,8 +118,10 @@ deleteMovie = async () => {
                   </div>
                   <div className="buttons-container">
                   <button onClick={this.addMovie}>Add to My List</button>
-                  <button onClick={this.handleChange}>Watched</button>
+                  <button onClick={() => {this.handleChange(); this.sendBackData();}}>Watched</button>
+                  {/* <button onClick={this.handleChange}>Watched</button> */}
                   <button onClick={this.deleteMovie}>Delete From My List</button>
+                  {/* <button onClick={() => {this.deleteMovie(); this.sendBackData();}}>Delete From My List</button> */}
                   </div>
               </div>
           </div>
