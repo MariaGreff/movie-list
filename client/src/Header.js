@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route, BrowserRouter } from 'react-router-dom';
-import MoviesList from './MoviesList';
-import MyList from './MyList';
-
+import { Link, } from 'react-router-dom';
 
 class Header extends Component {
   render() {

@@ -3,7 +3,7 @@ require('dotenv').config()
 
 class MovieCard extends Component {
   state = {
-   search: ''
+   isWatched: false
   };
 
   componentDidMount() {
@@ -28,6 +28,23 @@ class MovieCard extends Component {
     });
   }
 
+  // mark movie as watched
+  handleChange = async () => {
+    console.log('marked as watched');
+    await fetch(`/api/movies/${this.state.imdbID}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ isWatched : !this.state.isWatched }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      this.setState( prevState => { 
+        return {...prevState, ...data} 
+      })
+      console.log(this.state);
+  });
+  }
+
 // delete movie from my list
   deleteMovie = async () => {
     console.log('deleted from my list');
@@ -50,6 +67,7 @@ class MovieCard extends Component {
       Plot,
       Poster,
       imdbRating,
+      isWatched
     } = this.state;
 
   if (!Poster || Poster === 'N/A') {
@@ -57,7 +75,7 @@ class MovieCard extends Component {
   }
 
   return (
-  <div className={`movie-card-container `}>
+  <div className={`movie-card-container ${isWatched.toString()}`}>
     <div className="image-container">
       <div
       className="bg-image"
@@ -79,6 +97,7 @@ class MovieCard extends Component {
       </div>
       <div className="buttons-container">
       <button onClick={this.addMovie}>Add to My List</button>
+      <button onClick={this.handleChange}>Watched</button>
       <button onClick={this.deleteMovie}>Delete From My List</button>
       </div>
     </div>

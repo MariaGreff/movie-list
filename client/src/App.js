@@ -4,7 +4,6 @@ import './App.css';
 import Home from './Home';
 import MoviesList from './MoviesList';
 import MyList from './MyList';
-import Header from './Header';
 
 class App extends Component {
   render() {
@@ -12,7 +11,6 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path='/' component={Home}/>
-          {/* <Header /> */}
           <Route path='/MoviesList' component={MoviesList}/>
           <Route path='/MyList' component={MyList}/>
         </Switch>
@@ -20,7 +18,6 @@ class App extends Component {
     )
     return (
       <Switch>
-        {/* <Header /> */}
         <App/>
       </Switch>
     );
